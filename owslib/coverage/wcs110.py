@@ -211,9 +211,10 @@ class Operation(object):
 class ServiceIdentification(object):
     """ Abstraction for ServiceIdentification Metadata 
     implements IServiceIdentificationMetadata"""
+    self.version="1.1.0"
+            
     def __init__(self,elem):        
         self.service="WCS"
-        self.version="1.1.0"
         self.title=testXMLValue(elem.find(nsOWS('Title')))
         if self.title is None:  #may have used the wcs ows namespace:
             self.title=testXMLValue(elem.find(nsWCS_OWS('Title')))
