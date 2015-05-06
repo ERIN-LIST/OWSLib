@@ -221,6 +221,7 @@ class ServiceIdentification(object):
             
     def __init__(self, elem, nmSpc):        
         self.service="WCS"
+
         self.title=testXMLValue(elem.find(nmSpc.OWS('Title')))
         if self.title is None:  #may have used the wcs ows namespace:
             self.title=testXMLValue(elem.find(nmSpc.WCS_OWS('Title')))
@@ -252,14 +253,15 @@ class ServiceIdentification(object):
 class ServiceProvider(object):
     """ Abstraction for ServiceProvider metadata 
     implements IServiceProviderMetadata """
-    ns = Namespaces_1_1_0()
     
     def __init__(self, elem, nmSpc):
         name=elem.find(self.ns.OWS('ProviderName'))
+
         if name is not None:
             self.name=name.text
         else:
             self.name=None
+
         #self.contact=ServiceContact(elem.find(nmSpc.OWS('ServiceContact')))
         self.contact =ContactMetadata(elem, nmSpc)
         self.url=self.name # no obvious definitive place for url in wcs, repeat provider name?
